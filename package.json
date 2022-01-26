@@ -8,7 +8,7 @@
     "dev": "gulp dev",
     "build": "gulp build --includeDependencies",
     "package": "gulp package",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --config jest.config.js"
   },
   "repository": {
     "type": "git",
@@ -42,6 +42,7 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-svgmin": "^4.1.0",
     "gulp-zip": "^5.1.0",
+    "jest": "^27.4.7",
     "node-notifier": "^10.0.0",
     "sass": "^1.49.0",
     "vinyl-buffer": "^1.0.1",

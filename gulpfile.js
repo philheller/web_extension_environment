@@ -151,11 +151,13 @@ const js = (inputFromSrc) => {
     .service_worker;
 
   const isBgScript = inputFromSrc === bgScriptName ? true : false;
+  // ignore jest test files
+  const jestTestsGlob = inputFromSrc.slice(0, -2).concat("test.js");
 
   // if it is backgroundscript, write to root folder, else write all to js
   const outputPath = isBgScript ? `${dist}/` : `${dist}/js`;
   return gulp
-    .src(`${src}/${inputFromSrc}`)
+    .src([`${src}/${inputFromSrc}`, `!${src}/${jestTestsGlob}`])
     .pipe(plumber())
     .pipe(
       gulpEsbuild({
