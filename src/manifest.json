@@ -10,8 +10,11 @@
   "default_locale": "en",
   "description": "__MSG_extensionDescription__",
   "icons": {
-    "38": "img/icon38.png",
-    "64": "img/icon64.png"
+    "38": "img/icons/cursor16.png",
+    "24": "img/icons/cursor24.png",
+    "32": "img/icons/cursor32.png",
+    "48": "img/icons/cursor48.png",
+    "128": "img/icons/cursor128.png"
   },
   "author": "Your Name",
   "background": {
