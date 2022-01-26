@@ -1,0 +1,47 @@
+{
+  "extensionName": {
+    "message": "Extension name",
+    "description": "Name of this extension"
+  },
+  "extensionDescription": {
+    "message": "Extension description",
+    "description": "Description of this extension"
+  },
+  "uniqueIdentifier": {
+    "message": "Message text, with optional placeholders.",
+    "description": "Translator-aimed description of the message.",
+    "placeholders": {
+      "placeholder_name": {
+        "content": "A string to be placed within the message, can be set programatically in code with the function getMessage provided in the i18n infrastructure.",
+        "example": "Translator-aimed example of the placeholder string."
+      }
+    }
+  },
+  "prompt_for_name": {
+    "message": "What's your name?",
+    "description": "Ask for the user's name"
+  },
+  "hello": {
+    "message": "Hello, $USER$",
+    "description": "Greet the user",
+    "placeholders": {
+      "user": {
+        "content": "$1",
+        "example": "Cira"
+      }
+    }
+  },
+  "bye": {
+    "message": "Goodbye, $USER$. Come back to $OUR_SITE$ soon!",
+    "description": "Say goodbye to the user",
+    "placeholders": {
+      "our_site": {
+        "content": "Example.com"
+      },
+      "user": {
+        "content": "$1",
+        "example": "Cira"
+      }
+    }
+  }
+}

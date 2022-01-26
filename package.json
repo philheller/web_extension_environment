@@ -4,6 +4,10 @@
   "description": "This repo serves as a basic template for extensions.",
   "main": "background.js",
   "scripts": {
+    "start": "gulp dev",
+    "dev": "gulp dev",
+    "build": "gulp build --includeDependencies",
+    "package": "gulp package",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +23,28 @@
   "bugs": {
     "url": "https://github.com/philheller/web_extension_environment/issues"
   },
-  "homepage": "https://github.com/philheller/web_extension_environment#readme"
+  "homepage": "https://github.com/philheller/web_extension_environment#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "cssnano": "^5.0.16",
+    "del": "^6.0.0",
+    "fancy-log": "^2.0.0",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-esbuild": "^0.10.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-if": "^3.0.0",
+    "gulp-npm-dist": "^1.0.3",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-svgmin": "^4.1.0",
+    "gulp-zip": "^5.1.0",
+    "node-notifier": "^10.0.0",
+    "sass": "^1.49.0",
+    "vinyl-buffer": "^1.0.1",
+    "yargs": "^17.3.1"
+  }
 }

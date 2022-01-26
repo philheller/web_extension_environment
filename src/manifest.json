@@ -1,0 +1,69 @@
+{
+  "manifest_version": 3,
+  "name": "My Extension",
+  "version": "0.0.0 (used for internal strict ordering and updates)",
+  "version_name": "0.0.0 (displayed to users)",
+  "action": {
+    "default_title": "__MSG_extensionName__",
+    "default_popup": "icon.html"
+  },
+  "default_locale": "en",
+  "description": "__MSG_extensionDescription__",
+  "icons": {
+    "38": "img/icon38.png",
+    "64": "img/icon64.png"
+  },
+  "author": "Your Name",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "toggle-feature-foo": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+5"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.nytimes.com/*"],
+      "css": ["styles.min.css"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "externally_connectable": {
+    "matches": ["*://*.example.com/*/use/with/caution"]
+  },
+  "homepage_url": "https://path/to/homepage",
+  "permissions": ["activeTab"],
+  "optional_permissions": ["tabs"],
+  "host_permissions": ["https://www.developer.chrome.com/*"],
+  "import": [
+    {
+      "id": "some id; --> import shared module (needs to be installed from the Chrome Web Store)"
+    }
+  ],
+  "incognito": "spanning, split, or not_allowed",
+  "minimum_chrome_version": "versionString",
+  "offline_enabled": true,
+  "omnibox": {
+    "keyword": "aString"
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "short_name": "Short Name",
+  "web_accessible_resources": [
+    {
+      "resources": ["test1.png", "test2.png"],
+      "matches": ["https://web-accessible-resources-1.glitch.me/*"]
+    },
+    {
+      "resources": ["test3.png", "test4.png"],
+      "matches": ["https://web-accessible-resources-2.glitch.me/*"],
+      "use_dynamic_url": true
+    }
+  ]
+}
