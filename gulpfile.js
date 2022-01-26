@@ -305,7 +305,17 @@ const allBasicTasks = gulp.series(
 );
 
 // dev task (building and watching afterwards)
-const dev = gulp.series(allBasicTasks, watch);
+const dev = gulp.series(
+  clear,
+  allBasicTasks,
+  (cb) =>
+    notify(
+      cb,
+      "Clear build produced!",
+      "The dist was cleared and freshly build. Any changes will be processed on save."
+    ),
+  watch
+);
 
 // build without watching
 const build = gulp.series(clear, allBasicTasks, (cb) =>

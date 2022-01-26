@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "My Extension",
-  "version": "0.0.0 (used for internal strict ordering and updates)",
-  "version_name": "0.0.0 (displayed to users)",
+  "version": "0.0.0",
+  "version_name": "0.0.0 (displayed to users, while version's for internal strict ordering and updates)",
   "action": {
     "default_title": "__MSG_extensionName__",
     "default_popup": "icon.html"
@@ -23,8 +23,8 @@
   "content_scripts": [
     {
       "matches": ["https://*.nytimes.com/*"],
-      "css": ["styles.min.css"],
-      "js": ["contentScript.js"]
+      "css": ["css/styles.min.css"],
+      "js": ["js/contentScript.js"]
     }
   ],
   "browser_specific_settings": {
@@ -34,10 +34,15 @@
     }
   },
   "commands": {
-    "toggle-feature-foo": {
+    "run-foo": {
       "suggested_key": {
-        "default": "Ctrl+Shift+5"
-      }
+        "default": "Ctrl+Shift+Y",
+        "windows": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y",
+        "chromeos": "Ctrl+Shift+U",
+        "linux": "Ctrl+Shift+J"
+      },
+      "description": "Run \"foo\" on the current page."
     }
   },
   "externally_connectable": {
@@ -47,20 +52,15 @@
   "permissions": ["activeTab"],
   "optional_permissions": ["tabs"],
   "host_permissions": ["https://www.developer.chrome.com/*"],
-  "import": [
-    {
-      "id": "some id; --> import shared module (needs to be installed from the Chrome Web Store)"
-    }
-  ],
-  "incognito": "spanning, split, or not_allowed",
-  "minimum_chrome_version": "versionString",
+  "incognito": "not_allowed",
+  "minimum_chrome_version": "56",
   "offline_enabled": true,
   "omnibox": {
     "keyword": "aString"
   },
-  "options_page": "options.html",
+  "options_page": "html/options.html",
   "options_ui": {
-    "page": "options.html",
+    "page": "html/options.html",
     "open_in_tab": false
   },
   "short_name": "Short Name",
