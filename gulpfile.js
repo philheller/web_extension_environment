@@ -11,6 +11,7 @@ const notifier = require("node-notifier");
 const npmDist = require("gulp-npm-dist");
 const del = require("del");
 const gzip = require("gulp-zip");
+const path = require("path");
 
 // media (imgs and svgs)
 const svgmin = require("gulp-svgmin");
@@ -47,14 +48,6 @@ const thunderbirdDirExtension = ".xpi";
 // check for production marker
 function isProduction() {
   return argv.production ? true : false;
-}
-
-function isIncludeDependencies() {
-  return argv.includeDependencies ? true : false;
-}
-
-function howIncludeDependencies() {
-  return argv.includeDependencies;
 }
 
 function notify(cb, title, message) {
@@ -111,8 +104,9 @@ const svgToIcon = (size) =>
     )
     .pipe(gulp.dest(`${dist}/img/icons`));
 
+//  creating different png-icon sizes from svg
 const svgToIcons = (cb) => {
-  const sizes = [16, 24, 32, 48, 128];
+  const sizes = [16, 24, 32, 38, 48, 128];
   log(`Attempting to create the following icon sizes: ${sizes}`);
   sizes.forEach((size) => svgToIcon(size));
   cb();
@@ -193,7 +187,7 @@ const js = (inputFromSrc) => {
     .pipe(plumber())
     .pipe(
       gulpEsbuild({
-        bundle: false,
+        bundle: true,
         minifyWhitespace: true,
         minifyIdentifiers: true,
         minifySyntax: true,
@@ -206,53 +200,6 @@ const js = (inputFromSrc) => {
 };
 const contentScripts = () => js(`js/**/*.js`);
 const backgroundScript = () => js(`background.js`);
-
-// Copy dependencies to dist/public/libs/
-const publicLibs = (cb) => {
-  if (!npmDist().length) {
-    log("There is no dependency to be included.");
-    log("Use 'npm i <package_name>' to install dependencies.");
-    return cb();
-  }
-  return gulp
-    .src(npmDist(), { base: "./node_modules/" })
-    .pipe(plumber())
-    .pipe(
-      rename(function (path) {
-        path.dirname = path.dirname.replace(/\/dist/, "").replace(/\\dist/, "");
-      })
-    )
-    .pipe(gulp.dest(`${dist}/public/libs`));
-};
-
-// Copy dependencies to dist/js/libs/
-const contentScriptLibs = (cb) => {
-  if (!npmDist().length) {
-    log("There is no dependency to be included.");
-    log("Use 'npm i <package_name>' to install dependencies.");
-    return cb();
-  }
-  return gulp
-    .src(npmDist(), { base: "./node_modules/" })
-    .pipe(plumber())
-    .pipe(
-      rename(function (path) {
-        path.dirname = path.dirname.replace(/\/dist/, "").replace(/\\dist/, "");
-      })
-    )
-    .pipe(gulp.dest(`${dist}/js/libs`));
-};
-
-// determine lib packing style (f.e. using libs as content script or in public folder)
-const packDependencies = (cb) => {
-  if (isIncludeDependencies()) {
-    log("Dependencies will be packed with build.");
-    const how = howIncludeDependencies();
-    if (how == 1) return publicLibs(cb);
-    else if (how == 2) return contentScriptLibs(cb);
-  }
-  cb();
-};
 
 // to folders for installs
 const compress = (ext) => {
@@ -300,8 +247,7 @@ const allBasicTasks = gulp.series(
     css,
     contentScripts,
     backgroundScript
-  ),
-  packDependencies
+  )
 );
 
 // dev task (building and watching afterwards)

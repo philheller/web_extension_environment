@@ -2,17 +2,25 @@
   "manifest_version": 3,
   "name": "My Extension",
   "version": "0.0.0",
-  "version_name": "0.0.0 (displayed to users, while version's for internal strict ordering and updates)",
+  "version_name": "0.0.0 (displayed to users, while version is for internal strict ordering and updates)",
   "action": {
     "default_title": "__MSG_extensionName__",
-    "default_popup": "icon.html"
+    "default_icon": {
+      "16": "img/icons/cursor16.png",
+      "24": "img/icons/cursor24.png",
+      "32": "img/icons/cursor32.png",
+      "38": "img/icons/cursor16.png",
+      "48": "img/icons/cursor48.png",
+      "128": "img/icons/cursor128.png"
+    }
   },
   "default_locale": "en",
   "description": "__MSG_extensionDescription__",
   "icons": {
-    "38": "img/icons/cursor16.png",
+    "16": "img/icons/cursor16.png",
     "24": "img/icons/cursor24.png",
     "32": "img/icons/cursor32.png",
+    "38": "img/icons/cursor16.png",
     "48": "img/icons/cursor48.png",
     "128": "img/icons/cursor128.png"
   },
@@ -22,7 +30,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*.nytimes.com/*"],
+      "matches": ["<all_urls>"],
       "css": ["css/styles.min.css"],
       "js": ["js/contentScript.js"]
     }
@@ -49,7 +57,7 @@
     "matches": ["*://*.example.com/*/use/with/caution"]
   },
   "homepage_url": "https://path/to/homepage",
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "contextMenus", "storage"],
   "optional_permissions": ["tabs"],
   "host_permissions": ["https://www.developer.chrome.com/*"],
   "incognito": "not_allowed",
