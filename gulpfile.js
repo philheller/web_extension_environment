@@ -5,17 +5,13 @@ const plumber = require("gulp-plumber");
 const rename = require("gulp-rename");
 const sourcemaps = require("gulp-sourcemaps");
 const argv = require("yargs").argv;
-const gulpif = require("gulp-if");
 const log = require("fancy-log");
 const notifier = require("node-notifier");
-const npmDist = require("gulp-npm-dist");
 const del = require("del");
 const gzip = require("gulp-zip");
-const path = require("path");
 
 // media (imgs and svgs)
 const svgmin = require("gulp-svgmin");
-const svg2png = require("gulp-svg2png-update");
 
 // sass
 const sass = require("gulp-sass")(require("sass"));
@@ -36,10 +32,6 @@ const gulpEsbuild = createGulpEsbuild({ incremental: false });
 const src = "./src";
 const dist = "./dist";
 const pack = "./package";
-
-// png icons from svg
-const extensionSVGIcon = "cursor.svg";
-const iconSettings = {};
 
 const browserDirExtension = ".zip";
 const thunderbirdDirExtension = ".xpi";
@@ -84,33 +76,6 @@ const svg = () =>
       })
     )
     .pipe(gulp.dest(`${dist}/img/`));
-
-// create icons from svg
-const svgToIcon = (size) =>
-  gulp
-    .src(`${src}/img/${extensionSVGIcon}`)
-    .pipe(plumber())
-    .on("end", () => log(`Creating icon with size ${size}`))
-    .pipe(
-      svg2png({
-        width: size,
-        height: size,
-      })
-    )
-    .pipe(
-      rename({
-        suffix: size,
-      })
-    )
-    .pipe(gulp.dest(`${dist}/img/icons`));
-
-//  creating different png-icon sizes from svg
-const svgToIcons = (cb) => {
-  const sizes = [16, 24, 32, 38, 48, 128];
-  log(`Attempting to create the following icon sizes: ${sizes}`);
-  sizes.forEach((size) => svgToIcon(size));
-  cb();
-};
 
 // Copy _locales
 const locales = () =>
@@ -242,7 +207,6 @@ const allBasicTasks = gulp.series(
     locales,
     copyImgs,
     svg,
-    svgToIcons,
     html,
     css,
     contentScripts,
