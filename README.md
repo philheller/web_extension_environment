@@ -1,3 +1,5 @@
+> :warning: Archived in favor of HMR enabled environment: [consider using this template instead](https://github.com/philheller/browser_extension_environment).
+
 # Extension development
 
 [What is this environment for?](#what-is-this-environment-for)
